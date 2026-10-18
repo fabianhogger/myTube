@@ -41,6 +41,16 @@ export function dumpDebug(runId: number | null, source: string, payload: unknown
   return file;
 }
 
+/**
+ * YouTube answers a logged-out browse with a feedNudgeRenderer ("sign in to get
+ * your recommendations") and no video entries. Recognising that shape turns an
+ * opaque "extracted 0 videos" into an instruction.
+ */
+export function looksLoggedOut(data: unknown): boolean {
+  const s = JSON.stringify(data ?? {});
+  return s.includes("feedNudgeRenderer") || s.includes("ytd-shelf-renderer-sign-in");
+}
+
 /** Pre-flight: tell a signed-out profile apart from a consent wall and a bot check. */
 export async function assertUsablePage(page: Page): Promise<void> {
   const url = page.url();

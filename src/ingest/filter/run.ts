@@ -3,7 +3,7 @@ import { FAKE_LLM } from "../../lib/env";
 import { logger } from "../../lib/log";
 import { getActivePrompt } from "../../lib/prompt";
 import { completeBatch, claimBatch } from "../../lib/repo/verdicts";
-import { videosNeedingFilter } from "../../lib/repo/videos";
+import { countNeedingFilter, videosNeedingFilter } from "../../lib/repo/videos";
 import type { VideoRow } from "../../lib/types";
 import { planSystem } from "./client";
 import { runBatch } from "./batch";
@@ -12,6 +12,18 @@ import { BATCH_SIZE } from "./schema";
 const log = logger("filter");
 
 const CONCURRENCY = 3;
+
+/**
+ * Hard ceiling on what one filter run may spend, enforced between batches.
+ * Without it, a single careless invocation can judge a multi-thousand-video
+ * backlog at full price before anyone notices. Raise it deliberately via
+ * MYTUBE_MAX_SPEND_USD when you actually intend to clear a large backlog.
+ */
+const DEFAULT_MAX_SPEND_USD = 2.0;
+const maxSpend = () => {
+  const raw = Number(process.env.MYTUBE_MAX_SPEND_USD);
+  return Number.isFinite(raw) && raw > 0 ? raw : DEFAULT_MAX_SPEND_USD;
+};
 
 export type FilterResult = {
   judged: number;
@@ -73,8 +85,22 @@ export async function runFilter(
 
   let done = 0;
 
+  const limit = maxSpend();
+  let stoppedOnBudget = false;
+
   /** Processes one batch, binary-splitting on failure to isolate the bad item. */
   async function process(rows: VideoRow[]): Promise<void> {
+    if (result.costUsd >= limit) {
+      if (!stoppedOnBudget) {
+        stoppedOnBudget = true;
+        log.warn(
+          `spend cap reached ($${result.costUsd.toFixed(2)} of $${limit.toFixed(2)}) — ` +
+            "stopping. Unjudged videos are picked up on the next run. " +
+            "Raise it with MYTUBE_MAX_SPEND_USD=<dollars>.",
+        );
+      }
+      return;
+    }
     const outcome = await runBatch(rows, prompt.hash, system, prompt.model, runId);
     result.batches++;
     result.costUsd += outcome.costUsd;
@@ -120,6 +146,10 @@ export async function runFilter(
     `judged ${result.judged} (${result.pass} pass, ${result.block} block, ${result.errored} error) ` +
       `in ${result.batches} batch(es), $${result.costUsd.toFixed(4)}, cache_read ${result.cacheRead} tokens`,
   );
+  if (stoppedOnBudget) {
+    const left = countNeedingFilter(prompt.hash);
+    log.warn(`${left} video(s) still unjudged because of the spend cap.`);
+  }
   return result;
 }
 

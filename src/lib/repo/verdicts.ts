@@ -113,6 +113,40 @@ export function verdictsByDecision(promptHash: string, decision: Decision, limit
   }[];
 }
 
+/**
+ * Verdicts decided before their video was enriched were judged on incomplete
+ * metadata — typically "duration: unknown", which is exactly what separates a
+ * Short from a lecture. Verdicts are keyed on the prompt, not the metadata, so
+ * these do not expire on their own and have to be dropped deliberately.
+ */
+export function countStaleVerdicts(promptHash: string): number {
+  return getDb()
+    .prepare(
+      `SELECT COUNT(*) FROM filter_verdicts fv
+       JOIN videos v ON v.id = fv.video_id
+       WHERE fv.prompt_hash = ?
+         AND v.enriched_at IS NOT NULL
+         AND fv.created_at < v.enriched_at`,
+    )
+    .pluck()
+    .get(promptHash) as number;
+}
+
+export function dropStaleVerdicts(promptHash: string): number {
+  const info = getDb()
+    .prepare(
+      `DELETE FROM filter_verdicts
+       WHERE prompt_hash = ?
+         AND video_id IN (
+           SELECT v.id FROM videos v
+           JOIN filter_verdicts f2 ON f2.video_id = v.id AND f2.prompt_hash = ?
+           WHERE v.enriched_at IS NOT NULL AND f2.created_at < v.enriched_at
+         )`,
+    )
+    .run(promptHash, promptHash);
+  return info.changes;
+}
+
 export function batchStats(promptHash: string) {
   const row = getDb()
     .prepare(

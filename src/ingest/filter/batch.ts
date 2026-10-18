@@ -107,7 +107,12 @@ export async function runBatch(
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     markBatchRunning(batchId, attempt);
     try {
-      const res = await anthropic().messages.parse({
+      // create(), not parse(): parse() parses the body before returning, so a
+      // refused response throws an opaque "Unterminated string in JSON" from
+      // its truncated content and the stop_reason check below never runs.
+      // Server-side fallbacks route a refusal to another model, which matters
+      // for legitimate security content that trips the `cyber` classifier.
+      const res = await anthropic().beta.messages.create({
         model,
         max_tokens: 8000,
         system: system.blocks,
@@ -115,21 +120,34 @@ export async function runBatch(
           effort: "low",
           format: jsonSchemaOutputFormat(VERDICT_SCHEMA),
         },
+        betas: ["server-side-fallback-2026-07-01"],
+        fallbacks: "default",
         messages: [{ role: "user", content: JSON.stringify(payload) }],
       });
 
       // Safety classifiers can decline on a video title; check before reading content.
       if (res.stop_reason === "refusal") {
-        throw new RefusalError(
-          `refused (${res.stop_details?.type === "refusal" ? res.stop_details.category ?? "unknown" : "unknown"})`,
-        );
+        const category =
+          res.stop_details?.type === "refusal" ? (res.stop_details.category ?? "unknown") : "unknown";
+        throw new RefusalError(`refused (${category})`);
       }
       if (res.stop_reason === "max_tokens") {
         throw new Error("response hit max_tokens — batch too large");
       }
 
-      const parsed = res.parsed_output as { verdicts?: RawVerdict[] } | null | undefined;
-      if (!parsed?.verdicts) throw new Error("no parsable verdicts in response");
+      const text = res.content
+        .filter((b): b is Anthropic.Beta.BetaTextBlock => b.type === "text")
+        .map((b) => b.text)
+        .join("");
+      if (!text.trim()) throw new Error(`empty response (stop_reason: ${res.stop_reason})`);
+
+      let parsed: { verdicts?: RawVerdict[] };
+      try {
+        parsed = JSON.parse(text) as { verdicts?: RawVerdict[] };
+      } catch (err) {
+        throw new Error(`unparsable response: ${(err as Error).message}`);
+      }
+      if (!parsed?.verdicts) throw new Error("no verdicts array in response");
 
       const { verdicts, unmatched } = matchVerdicts(rows, parsed.verdicts);
       if (unmatched.length) log.warn(`dropped ${unmatched.length} unknown ref(s): ${unmatched.join(", ")}`);
@@ -157,10 +175,12 @@ export async function runBatch(
     } catch (err) {
       lastError = (err as Error).message;
       const status = err instanceof Anthropic.APIError ? err.status : undefined;
+      // A refusal is deterministic: the same payload through the same classifier
+      // refuses again. Retrying it just spends money, so bail out and let the
+      // caller split the batch to isolate the offending video.
       const retryable =
-        err instanceof RefusalError ||
-        err instanceof Anthropic.APIConnectionError ||
-        RETRYABLE_STATUS(status);
+        !(err instanceof RefusalError) &&
+        (err instanceof Anthropic.APIConnectionError || RETRYABLE_STATUS(status));
 
       // A 400 is a bad request, not bad luck: retrying sends the same thing again.
       if (!retryable || attempt === MAX_ATTEMPTS) {

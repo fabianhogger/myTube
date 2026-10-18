@@ -47,8 +47,12 @@ npm run oauth:login    # source A: read your subscription list
 npm run yt:login       # source B: sign in to the browser profile the scraper reuses
 ```
 
-`yt:login` opens a real browser window. Sign in, accept any cookie dialog, and it
-closes itself once it sees the session cookie. Google invalidates this session
+`yt:login` opens a real browser window. **Sign in on youtube.com specifically and
+confirm your avatar appears top-right** — signing into Google alone is not enough.
+Google's session cookies live on `.google.com`, while YouTube issues its own
+`LOGIN_INFO` cookie on `.youtube.com`; without it youtube.com serves its
+logged-out feed and the scraper finds no videos. The script waits for that exact
+cookie and warns you if it sees a Google session without it. Google invalidates this session
 every few weeks — rerun it when the scrape stage reports `not_signed_in`.
 
 By default that window is Playwright's bundled Chromium. To use another
@@ -82,6 +86,20 @@ npm run verdicts -- --diff <hash>     # what changed between two prompts
 ```
 
 Stages: `subscriptions`, `rss`, `enrich`, `scrape_home`, `scrape_subs`, `filter`.
+
+## Spending controls
+
+Judging costs roughly $0.002/video, which adds up fast on a first backlog of a
+few thousand. Two guards, because a single careless command should not be able to
+spend real money:
+
+- `npm run filter` **does nothing** when the estimate exceeds $0.50. It prints the
+  count and cost and waits for `npm run filter -- --yes`.
+- Any single filter run, from the CLI *or* the UI button, stops once it has spent
+  **$2.00**. Unjudged videos are simply picked up next time. Override deliberately:
+  `MYTUBE_MAX_SPEND_USD=10 npm run ingest`.
+
+Check what you have spent at any time with `npm run verdicts`.
 
 ## Tuning the filter
 

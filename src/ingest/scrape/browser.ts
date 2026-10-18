@@ -68,10 +68,37 @@ export async function withContext<T>(
   }
 }
 
-/** The cookies that mean "this profile is signed in to Google". */
-export const SESSION_COOKIES = ["SAPISID", "__Secure-3PSID", "__Secure-1PSID", "SID"];
+/**
+ * YouTube's own auth cookie, scoped to .youtube.com.
+ *
+ * Checking for Google's SID/SAPISID is NOT enough: those live on .google.com and
+ * are present whenever you are signed into any Google property. You can hold a
+ * full Google session while youtube.com still treats you as a logged-out
+ * visitor, in which case the home feed returns a "sign in" nudge and no videos.
+ * LOGIN_INFO is the cookie that actually means "signed in to YouTube".
+ */
+export const YT_AUTH_COOKIE = "LOGIN_INFO";
+
+/** Google-scoped session cookies: necessary but not sufficient. Used for diagnostics. */
+export const GOOGLE_SESSION_COOKIES = ["SAPISID", "__Secure-3PSID", "__Secure-1PSID", "SID"];
 
 export async function isSignedIn(ctx: BrowserContext): Promise<boolean> {
   const cookies = await ctx.cookies();
-  return cookies.some((c) => SESSION_COOKIES.includes(c.name) && c.value.length > 0);
+  return cookies.some(
+    (c) => c.domain.includes("youtube.com") && c.name === YT_AUTH_COOKIE && c.value.length > 0,
+  );
+}
+
+/** Tells "no Google session at all" apart from "Google yes, YouTube no". */
+export async function signInDetail(ctx: BrowserContext): Promise<{
+  google: boolean;
+  youtube: boolean;
+}> {
+  const cookies = await ctx.cookies();
+  return {
+    google: cookies.some((c) => GOOGLE_SESSION_COOKIES.includes(c.name) && c.value.length > 0),
+    youtube: cookies.some(
+      (c) => c.domain.includes("youtube.com") && c.name === YT_AUTH_COOKIE && c.value.length > 0,
+    ),
+  };
 }

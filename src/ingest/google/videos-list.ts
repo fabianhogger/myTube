@@ -9,7 +9,17 @@ import type { VideoInput } from "../../lib/types";
 import { authorizedClient, youtubeClient } from "./oauth";
 
 const log = logger("enrich");
-/** videos.list accepts at most 50 ids per call. One call per video would burn the daily quota. */
+/**
+ * videos.list accepts at most 50 ids per call and costs 1 quota unit per call
+ * regardless of how many ids it carries. So a 2,500-video backlog is 50 calls =
+ * 50 units out of the 10,000/day budget. A per-video loop would be 2,500 units,
+ * which is how you accidentally exhaust the quota.
+ *
+ * Enrichment must keep up with RSS, because duration is what distinguishes a
+ * Short from a lecture. A video judged with "duration: unknown" keeps that
+ * verdict (verdicts are keyed on the prompt, not the metadata), so an
+ * under-sized limit here quietly degrades every verdict in that run.
+ */
 const IDS_PER_CALL = 50;
 /** A Short is <= 3 minutes; YouTube exposes no reliable flag on this endpoint. */
 const SHORT_MAX_SECONDS = 180;
@@ -68,7 +78,7 @@ export type EnrichResult = { requested: number; enriched: number; calls: number 
  * Fills in duration, view count and the exact publish timestamp. This is the
  * only stage that spends YouTube API quota beyond the subscription list.
  */
-export async function enrichVideos(runId: number | null, limit = 200): Promise<EnrichResult> {
+export async function enrichVideos(runId: number | null, limit = 2500): Promise<EnrichResult> {
   const ids = videosNeedingEnrichment(limit);
   if (ids.length === 0) {
     log.info("nothing to enrich");

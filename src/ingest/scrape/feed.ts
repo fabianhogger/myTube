@@ -5,9 +5,9 @@ import { FIXTURES_DIR, OFFLINE } from "../../lib/env";
 import { logger } from "../../lib/log";
 import { upsertVideos } from "../../lib/repo/videos";
 import { NamedError, type Source, type VideoInput } from "../../lib/types";
-import { withContext, isSignedIn, profileExists } from "./browser";
+import { withContext, isSignedIn, profileExists, signInDetail, YT_AUTH_COOKIE } from "./browser";
 import { extractFromBrowseData, extractFromContinuation } from "./renderers";
-import { assertUsablePage, dumpDebug, readYtInitialData } from "./yt-initial-data";
+import { assertUsablePage, dumpDebug, looksLoggedOut, readYtInitialData } from "./yt-initial-data";
 
 const log = logger("scrape");
 
@@ -57,6 +57,14 @@ async function scrapePage(page: Page, target: ScrapeTarget): Promise<{ videos: V
 
   if (byId.size === 0) {
     const file = dumpDebug(null, target.source, initial);
+    if (looksLoggedOut(initial)) {
+      throw new NamedError(
+        "not_signed_in",
+        `youtube.com served its logged-out feed. You hold a Google session but not a ` +
+          `YouTube one (no LOGIN_INFO cookie). Run \`npm run yt:login\` and make sure your ` +
+          `avatar appears top-right on youtube.com before the window closes. Payload: ${file}`,
+      );
+    }
     throw new NamedError(
       "no_items_extracted",
       `extracted 0 videos from ${target.label} (${first.stats.entries} entries seen). Raw payload: ${file}`,
@@ -115,7 +123,15 @@ export async function scrapeFeed(target: ScrapeTarget, runId: number | null): Pr
     }
     ({ videos, shapes } = await withContext(async (ctx) => {
       if (!(await isSignedIn(ctx))) {
-        throw new NamedError("not_signed_in", "Browser profile has no Google session — run `npm run yt:login`.");
+        const detail = await signInDetail(ctx);
+        throw new NamedError(
+          "not_signed_in",
+          detail.google
+            ? `the profile has a Google session but no YouTube one (no ${YT_AUTH_COOKIE} cookie on ` +
+              ".youtube.com), so youtube.com serves its logged-out feed. Run `npm run yt:login`, " +
+              "open youtube.com in that window, and confirm your avatar appears top-right before it closes."
+            : "the browser profile has no Google session at all — run `npm run yt:login`.",
+        );
       }
       const page = await ctx.newPage();
       return scrapePage(page, target);
