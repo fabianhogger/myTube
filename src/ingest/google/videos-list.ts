@@ -28,7 +28,9 @@ type RawVideo = {
   statistics?: { viewCount?: string | null } | null;
 };
 
-function bestThumb(thumbs: RawVideo["snippet"] extends infer _ ? any : never): string | null {
+type Thumbs = Record<string, { url?: string | null } | undefined> | null | undefined;
+
+function bestThumb(thumbs: Thumbs): string | null {
   for (const key of ["maxres", "standard", "high", "medium", "default"]) {
     const url = thumbs?.[key]?.url;
     if (url) return url;

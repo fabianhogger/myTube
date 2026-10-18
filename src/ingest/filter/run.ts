@@ -1,4 +1,5 @@
 import { getDb } from "../../lib/db";
+import { FAKE_LLM } from "../../lib/env";
 import { logger } from "../../lib/log";
 import { getActivePrompt } from "../../lib/prompt";
 import { completeBatch, claimBatch } from "../../lib/repo/verdicts";
@@ -61,7 +62,10 @@ export async function runFilter(
     return result;
   }
 
-  const system = await planSystem(prompt.model, prompt.text);
+  // FAKE_LLM decides locally, so there is no prefix to plan or token call to make.
+  const system = FAKE_LLM()
+    ? { blocks: [], cached: false, tokens: 0 }
+    : await planSystem(prompt.model, prompt.text);
 
   const batches: VideoRow[][] = [];
   for (let i = 0; i < pending.length; i += BATCH_SIZE) batches.push(pending.slice(i, i + BATCH_SIZE));

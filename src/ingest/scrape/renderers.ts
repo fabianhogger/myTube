@@ -81,7 +81,7 @@ function fromVideoRenderer(r: Any, now: Date): VideoInput | null {
 }
 
 /** Shorts shelf entries. */
-function fromReelItemRenderer(r: Any, _now: Date): VideoInput | null {
+function fromReelItemRenderer(r: Any): VideoInput | null {
   const id = pick<string>(r, "videoId");
   if (!id) return null;
   const title = pick<string>(r, "headline.simpleText", "headline.runs.0.text", "accessibility.accessibilityData.label");
@@ -211,7 +211,7 @@ function extractEntry(entry: Any, stats: ExtractStats, now: Date): VideoInput | 
     ["videoRenderer", fromVideoRenderer],
     ["gridVideoRenderer", fromVideoRenderer],
     ["compactVideoRenderer", fromVideoRenderer],
-    ["reelItemRenderer", fromReelItemRenderer],
+    ["reelItemRenderer", (r: Any) => fromReelItemRenderer(r)],
     ["shortsLockupViewModel", fromLockupViewModel],
     ["lockupViewModel", fromLockupViewModel],
   ];

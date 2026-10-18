@@ -6,7 +6,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit",
+    "ingest": "tsx scripts/ingest.ts",
+    "filter": "tsx scripts/filter.ts",
+    "verdicts": "tsx scripts/verdicts.ts",
+    "yt:login": "tsx scripts/yt-login.ts",
+    "oauth:login": "tsx scripts/oauth-login.ts",
+    "fixtures": "tsx scripts/capture-fixtures.ts",
+    "smoke": "rm -f data/test.db data/test.db-wal data/test.db-shm && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/ingest.ts && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/smoke-merge.ts && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/smoke-failsoft.ts && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/smoke-prompthash.ts",
+    "postinstall": "playwright install chromium"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",

@@ -94,7 +94,11 @@ function scrapeOffline(target: ScrapeTarget): { videos: VideoInput[]; shapes: Re
   const data = JSON.parse(fs.readFileSync(file, "utf8"));
   const { videos, stats } = extractFromBrowseData(data);
   if (videos.length === 0) {
-    throw new NamedError("no_items_extracted", `extracted 0 videos from fixture ${file}`);
+    const dump = dumpDebug(null, target.source, data);
+    throw new NamedError(
+      "no_items_extracted",
+      `extracted 0 videos from fixture ${file} (${stats.entries} entries seen). Raw payload: ${dump}`,
+    );
   }
   return { videos, shapes: stats.shapes };
 }
@@ -119,10 +123,11 @@ export async function scrapeFeed(target: ScrapeTarget, runId: number | null): Pr
   }
 
   if (videos.length < MIN_EXPECTED_ITEMS) {
+    const dump = dumpDebug(runId, target.source, { videos, shapes });
     throw new NamedError(
       "too_few_items",
       `only ${videos.length} videos from ${target.label} (expected >= ${MIN_EXPECTED_ITEMS}) — ` +
-        "YouTube's renderer shape has probably changed",
+        `YouTube's renderer shape has probably changed. What was extracted: ${dump}`,
     );
   }
 

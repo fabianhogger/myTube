@@ -49,6 +49,18 @@ ON CONFLICT(id) DO UPDATE SET
   raw_json         = COALESCE(excluded.raw_json, videos.raw_json)
 `;
 
+/**
+ * Videos routinely arrive referencing a channel we have never recorded (a
+ * scraped recommendation from a channel you do not subscribe to). The FK would
+ * reject those, so a stub channel row is created first. is_subscribed stays 0,
+ * and upsertChannels later fills in the real title without clobbering it.
+ */
+const ENSURE_CHANNEL = `
+INSERT INTO channels (id, title, is_subscribed, uploads_playlist_id)
+VALUES (@id, @title, 0, @uploads)
+ON CONFLICT(id) DO NOTHING
+`;
+
 const INSERT_SIGHTING = `
 INSERT INTO video_sightings (video_id, source, run_id, position, seen_at)
 VALUES (@video_id, @source, @run_id, @position, @now)
@@ -70,6 +82,7 @@ export function upsertVideos(
   const db = getDb();
   const upsert = db.prepare(UPSERT_VIDEO);
   const sighting = db.prepare(INSERT_SIGHTING);
+  const ensureChannel = db.prepare(ENSURE_CHANNEL);
   const exists = db.prepare("SELECT 1 FROM videos WHERE id = ?").pluck();
 
   const run = db.transaction((rows: VideoInput[]) => {
@@ -77,6 +90,13 @@ export function upsertVideos(
     let inserted = 0;
     rows.forEach((v, i) => {
       if (!exists.get(v.id)) inserted++;
+      if (v.channelId) {
+        ensureChannel.run({
+          id: v.channelId,
+          title: v.channelTitle ?? v.channelId,
+          uploads: v.channelId.startsWith("UC") ? `UU${v.channelId.slice(2)}` : v.channelId,
+        });
+      }
       upsert.run({
         id: v.id,
         channel_id: v.channelId ?? null,

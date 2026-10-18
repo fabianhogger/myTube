@@ -35,7 +35,8 @@ async function main() {
            <body style="font:16px system-ui;padding:3rem;max-width:34rem">${body}</body>`,
         );
         server.close();
-        err ? reject(err) : resolve();
+        if (err) reject(err);
+        else resolve();
       };
 
       if (error) return finish(400, `<h1>Denied</h1><p>Google returned: ${error}</p>`, new Error(error));

@@ -11,6 +11,15 @@ const parser = new XMLParser({
 });
 
 type Entry = Record<string, any>;
+type Any = Record<string, any>;
+
+/** A 22-char id with no "UC" prefix is the stripped feed-level form; restore it. */
+export function normalizeChannelId(id: string | null | undefined): string | null {
+  if (!id) return null;
+  const trimmed = id.trim();
+  if (trimmed.startsWith("UC")) return trimmed;
+  return /^[A-Za-z0-9_-]{22}$/.test(trimmed) ? `UC${trimmed}` : trimmed;
+}
 
 function text(v: unknown): string | null {
   if (v == null) return null;
@@ -25,7 +34,18 @@ export function parseChannelFeed(xml: string): { channelId: string | null; chann
   const feed = doc?.feed;
   if (!feed) return { channelId: null, channelTitle: null, videos: [] };
 
-  const channelId = text(feed["yt:channelId"]) ?? null;
+  // YouTube's RSS strips the leading "UC" from the FEED-level <yt:channelId>
+  // ("yt:channel:HnyfMq..."), while entries and the self link keep it. Prefer a
+  // source that carries the real id, and repair the stripped form as a fallback.
+  const selfHref = (Array.isArray(feed.link) ? feed.link : [feed.link])
+    .map((l: Any) => (l ? String(l["@href"] ?? "") : ""))
+    .find((href: string) => href.includes("channel_id=") || href.includes("/channel/"));
+  const fromHref =
+    /channel_id=(UC[\w-]{20,})/.exec(selfHref ?? "")?.[1] ??
+    /\/channel\/(UC[\w-]{20,})/.exec(selfHref ?? "")?.[1] ??
+    null;
+
+  const channelId = fromHref ?? normalizeChannelId(text(feed["yt:channelId"]));
   const channelTitle = text(feed.title) ?? null;
   const entries: Entry[] = Array.isArray(feed.entry) ? feed.entry : [];
 
@@ -40,7 +60,7 @@ export function parseChannelFeed(xml: string): { channelId: string | null; chann
     const thumb = group["media:thumbnail"]?.["@url"];
     videos.push({
       id,
-      channelId: channelId ?? text(e["yt:channelId"]),
+      channelId: normalizeChannelId(text(e["yt:channelId"])) ?? channelId,
       channelTitle: text(e.author?.name) ?? channelTitle,
       title,
       description: cleanDescription(text(group["media:description"]), 5000),

@@ -45,3 +45,5 @@ next-env.d.ts
 # the filter prompt is personal; filter-prompt.example.md is the committed starter
 /filter-prompt.md
 .env.local
+# smoke-test database
+data/test.db*

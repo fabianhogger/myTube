@@ -1,9 +1,41 @@
+import fs from "node:fs";
 import path from "node:path";
 
 /** Repo root. All local state lives under <root>/data. */
 export const ROOT = process.cwd();
+
+/**
+ * Next loads .env.local by itself, but the CLI scripts (`npm run ingest`,
+ * `npm run filter`) are plain node processes and would otherwise start with no
+ * API keys. Existing process env always wins, so an inline override still works.
+ */
+function loadEnvLocal(): void {
+  for (const name of [".env.local", ".env"]) {
+    const file = path.join(ROOT, name);
+    if (!fs.existsSync(file)) continue;
+    for (const raw of fs.readFileSync(file, "utf8").split("\n")) {
+      const line = raw.trim();
+      if (!line || line.startsWith("#")) continue;
+      const eq = line.indexOf("=");
+      if (eq < 1) continue;
+      const key = line.slice(0, eq).trim();
+      if (process.env[key] !== undefined) continue;
+      let value = line.slice(eq + 1).trim();
+      if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+        value = value.slice(1, -1);
+      }
+      process.env[key] = value;
+    }
+  }
+}
+
+// Next already loads .env.local itself; this is only for the plain-node scripts.
+if (!process.env.NEXT_RUNTIME) loadEnvLocal();
 export const DATA_DIR = path.join(ROOT, "data");
-export const DB_PATH = path.join(DATA_DIR, "mytube.db");
+/** Overridable so the smoke tests get their own database and never touch the real feed. */
+export const DB_PATH = process.env.MYTUBE_DB_PATH
+  ? path.resolve(ROOT, process.env.MYTUBE_DB_PATH)
+  : path.join(DATA_DIR, "mytube.db");
 export const CHROME_PROFILE_DIR = path.join(DATA_DIR, "chrome-profile");
 export const DEBUG_DIR = path.join(DATA_DIR, "debug");
 export const LOG_DIR = path.join(DATA_DIR, "logs");

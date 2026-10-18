@@ -8,7 +8,6 @@ export type Db = Database.Database;
 // Next's dev server re-evaluates modules on every edit. Without a global
 // singleton that leaks one SQLite handle per hot reload until the process dies.
 declare global {
-  // eslint-disable-next-line no-var
   var __mytube_db: Db | undefined;
 }
 

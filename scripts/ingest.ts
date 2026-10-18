@@ -14,10 +14,14 @@ import { ALL_STAGES, runIngest, type StageName } from "../src/ingest/run";
 const log = logger("ingest:cli");
 
 function parseArgs(argv: string[]) {
+  /** Supports both `--flag=value` and `--flag value`; a bare flag returns "". */
   const get = (name: string) => {
-    const hit = argv.find((a) => a === `--${name}` || a.startsWith(`--${name}=`));
-    if (!hit) return undefined;
-    return hit.includes("=") ? hit.slice(hit.indexOf("=") + 1) : "";
+    const i = argv.findIndex((a) => a === `--${name}` || a.startsWith(`--${name}=`));
+    if (i < 0) return undefined;
+    const hit = argv[i];
+    if (hit.includes("=")) return hit.slice(hit.indexOf("=") + 1);
+    const next = argv[i + 1];
+    return next && !next.startsWith("--") ? next : "";
   };
   const onlyRaw = get("only");
   const only = onlyRaw
