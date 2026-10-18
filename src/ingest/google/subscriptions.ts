@@ -1,8 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import { FIXTURES_DIR, OFFLINE } from "../../lib/env";
+import { google } from "googleapis";
+import { FIXTURES_DIR, OFFLINE, YOUTUBE_API_KEY } from "../../lib/env";
 import { logger } from "../../lib/log";
-import { upsertChannels, uploadsPlaylistId } from "../../lib/repo/channels";
+import { setChannelMeta, upsertChannels, uploadsPlaylistId } from "../../lib/repo/channels";
 import type { ChannelInput } from "../../lib/types";
 import { authorizedClient, youtubeClient } from "./oauth";
 
@@ -68,5 +69,44 @@ export async function syncSubscriptions(): Promise<{ found: number; inserted: nu
   }
   const result = upsertChannels(channels);
   log.info(`${result.found} subscriptions (${result.inserted} new channels)`);
+
+  if (!OFFLINE()) {
+    // channels.list costs 1 unit per 50 ids and fills in snippet.country, which
+    // is set for roughly three quarters of channels. Non-fatal: the subscription
+    // list is the point of this stage, country is a bonus.
+    try {
+      await fetchChannelMeta(channels.map((c) => c.id));
+    } catch (err) {
+      log.warn(`could not fetch channel country/subscribers: ${(err as Error).message}`);
+    }
+  }
   return result;
+}
+
+/** snippet.country is an ISO 3166-1 alpha-2 code, set only when the owner filled it in. */
+async function fetchChannelMeta(ids: string[]): Promise<void> {
+  const key = YOUTUBE_API_KEY();
+  const yt = key
+    ? google.youtube({ version: "v3", auth: key })
+    : youtubeClient(await authorizedClient());
+
+  const meta: { id: string; country?: string | null; subscriberCount?: number | null }[] = [];
+  for (let i = 0; i < ids.length; i += 50) {
+    const res = await yt.channels.list({
+      part: ["snippet", "statistics"],
+      id: ids.slice(i, i + 50),
+      maxResults: 50,
+    });
+    for (const c of res.data.items ?? []) {
+      if (!c.id) continue;
+      meta.push({
+        id: c.id,
+        country: c.snippet?.country ?? null,
+        subscriberCount: c.statistics?.subscriberCount ? Number(c.statistics.subscriberCount) : null,
+      });
+    }
+  }
+  setChannelMeta(meta);
+  const known = meta.filter((m) => m.country).length;
+  log.info(`country known for ${known}/${meta.length} channels`);
 }

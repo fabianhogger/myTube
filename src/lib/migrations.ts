@@ -138,6 +138,18 @@ const MIGRATIONS: string[] = [
     updated_at    TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%SZ','now'))
   );
   `,
+  // --- 002: channel bans, channel country, video language -----------------
+  `
+  ALTER TABLE channels ADD COLUMN is_banned INTEGER NOT NULL DEFAULT 0;
+  ALTER TABLE channels ADD COLUMN banned_at TEXT;
+  ALTER TABLE channels ADD COLUMN banned_reason TEXT;
+  ALTER TABLE channels ADD COLUMN country TEXT;
+  ALTER TABLE channels ADD COLUMN subscriber_count INTEGER;
+  ALTER TABLE videos ADD COLUMN language TEXT;
+  ALTER TABLE videos ADD COLUMN audio_language TEXT;
+  CREATE INDEX idx_channels_banned ON channels(is_banned);
+  CREATE INDEX idx_channels_country ON channels(country);
+  `,
 ];
 
 export function migrate(db: Database.Database): number {

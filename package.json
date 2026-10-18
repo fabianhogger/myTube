@@ -15,7 +15,8 @@
     "oauth:login": "tsx scripts/oauth-login.ts",
     "fixtures": "tsx scripts/capture-fixtures.ts",
     "smoke": "rm -f data/test.db data/test.db-wal data/test.db-shm && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/ingest.ts && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/smoke-merge.ts && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/smoke-failsoft.ts && MYTUBE_DB_PATH=data/test.db MYTUBE_OFFLINE=1 MYTUBE_FAKE_LLM=1 tsx scripts/smoke-prompthash.ts",
-    "postinstall": "playwright install chromium"
+    "postinstall": "playwright install chromium",
+    "channels": "tsx scripts/channels.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.135.0",

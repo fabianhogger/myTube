@@ -19,6 +19,9 @@ export type VideoInput = {
   isShort?: boolean;
   isLive?: boolean;
   isUpcoming?: boolean;
+  /** BCP-47 from videos.list snippet; audio language is the better signal when present. */
+  language?: string | null;
+  audioLanguage?: string | null;
   raw?: unknown;
 };
 
@@ -49,6 +52,8 @@ export type VideoRow = {
   first_seen_at: string;
   last_seen_at: string;
   enriched_at: string | null;
+  language: string | null;
+  audio_language: string | null;
 };
 
 export type Decision = "pass" | "block" | "error";

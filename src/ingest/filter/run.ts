@@ -1,4 +1,3 @@
-import { getDb } from "../../lib/db";
 import { FAKE_LLM } from "../../lib/env";
 import { logger } from "../../lib/log";
 import { getActivePrompt } from "../../lib/prompt";
@@ -155,14 +154,8 @@ export async function runFilter(
 
 /** Used by the UI to warn before a prompt change triggers a full re-filter. */
 export function refilterEstimate(promptHash: string): { pending: number; estimatedUsd: number } {
-  const pending = getDb()
-    .prepare(
-      `SELECT COUNT(*) FROM videos v
-       LEFT JOIN filter_verdicts fv ON fv.video_id = v.id AND fv.prompt_hash = ?
-       WHERE fv.video_id IS NULL AND v.is_upcoming = 0`,
-    )
-    .pluck()
-    .get(promptHash) as number;
-  // ~$0.003/video measured at effort "low".
-  return { pending, estimatedUsd: Number((pending * 0.003).toFixed(2)) };
+  // One definition of "pending", so bans and filters stay in sync.
+  const pending = countNeedingFilter(promptHash);
+  // ~$0.002/video measured at effort "low" on real batches.
+  return { pending, estimatedUsd: Number((pending * 0.002).toFixed(2)) };
 }

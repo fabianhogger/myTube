@@ -11,11 +11,13 @@ const UPSERT_VIDEO = `
 INSERT INTO videos (
   id, channel_id, channel_title, title, description, duration_seconds,
   published_at, published_approx, view_count, thumbnail_url,
-  is_short, is_live, is_upcoming, sources, raw_json, first_seen_at, last_seen_at
+  is_short, is_live, is_upcoming, sources, raw_json, first_seen_at, last_seen_at,
+  language, audio_language
 ) VALUES (
   @id, @channel_id, @channel_title, @title, @description, @duration_seconds,
   @published_at, @published_approx, @view_count, @thumbnail_url,
-  @is_short, @is_live, @is_upcoming, json_array(@source), @raw_json, @now, @now
+  @is_short, @is_live, @is_upcoming, json_array(@source), @raw_json, @now, @now,
+  @language, @audio_language
 )
 ON CONFLICT(id) DO UPDATE SET
   title            = COALESCE(NULLIF(excluded.title, ''), videos.title),
@@ -46,6 +48,8 @@ ON CONFLICT(id) DO UPDATE SET
                        ELSE json_insert(videos.sources, '$[#]', @source)
                      END,
   last_seen_at     = @now,
+  language         = COALESCE(excluded.language, videos.language),
+  audio_language   = COALESCE(excluded.audio_language, videos.audio_language),
   raw_json         = COALESCE(excluded.raw_json, videos.raw_json)
 `;
 
@@ -112,6 +116,8 @@ export function upsertVideos(
         is_live: v.isLive ? 1 : 0,
         is_upcoming: v.isUpcoming ? 1 : 0,
         source,
+        language: v.language ?? null,
+        audio_language: v.audioLanguage ?? null,
         raw_json: v.raw === undefined ? null : JSON.stringify(v.raw),
         now,
       });
@@ -154,7 +160,9 @@ export function videosNeedingFilter(promptHash: string, limit = 1000): VideoRow[
     .prepare(
       `SELECT v.* FROM videos v
        LEFT JOIN filter_verdicts fv ON fv.video_id = v.id AND fv.prompt_hash = ?
+       LEFT JOIN channels c ON c.id = v.channel_id
        WHERE fv.video_id IS NULL AND v.is_upcoming = 0
+         AND COALESCE(c.is_banned, 0) = 0
        ORDER BY v.first_seen_at DESC LIMIT ?`,
     )
     .all(promptHash, limit) as VideoRow[];
@@ -165,7 +173,9 @@ export function countNeedingFilter(promptHash: string): number {
     .prepare(
       `SELECT COUNT(*) FROM videos v
        LEFT JOIN filter_verdicts fv ON fv.video_id = v.id AND fv.prompt_hash = ?
-       WHERE fv.video_id IS NULL AND v.is_upcoming = 0`,
+       LEFT JOIN channels c ON c.id = v.channel_id
+       WHERE fv.video_id IS NULL AND v.is_upcoming = 0
+         AND COALESCE(c.is_banned, 0) = 0`,
     )
     .pluck()
     .get(promptHash) as number;
@@ -187,7 +197,9 @@ export function feed(promptHash: string, opts: { includeShorts?: boolean; limit?
          FROM video_sightings WHERE source LIKE 'scrape%' AND position IS NOT NULL
          GROUP BY video_id
        ) s ON s.video_id = v.id
+       LEFT JOIN channels bc ON bc.id = v.channel_id
        WHERE fv.decision = 'pass'
+         AND COALESCE(bc.is_banned, 0) = 0
          AND v.is_upcoming = 0
          AND (@include_shorts = 1 OR v.is_short = 0)
        ORDER BY (

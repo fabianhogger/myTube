@@ -87,6 +87,48 @@ npm run verdicts -- --diff <hash>     # what changed between two prompts
 
 Stages: `subscriptions`, `rss`, `enrich`, `scrape_home`, `scrape_subs`, `filter`.
 
+## Banning channels
+
+Some channels are never worth judging. Banning one hides its videos from the
+feed, skips it during RSS polling, and — the part that saves money — excludes it
+from filtering entirely, so you stop paying to judge videos you will never see.
+
+```bash
+npm run channels                        # list channels: country, videos, passes
+npm run channels -- --ban "Bad Friends" # ban by title, id, or substring
+npm run channels -- --banned            # review the ban list
+npm run channels -- --unban "Bad Friends"
+npm run channels -- --countries         # country breakdown
+npm run channels -- --ban-country GR --yes
+npm run channels -- --ban "drama" --reason "never useful"
+```
+
+A query matching several channels lists them and refuses to guess; add `--yes` to
+apply to all matches. Bans delete nothing: unbanning restores that channel's
+videos and existing verdicts immediately.
+
+## Channel country and video language
+
+`npm run channels -- --countries` shows where your subscriptions come from.
+Coverage is uneven, because these fields are optional for creators:
+
+| Field | Level | Typical coverage |
+|---|---|---|
+| `snippet.country` | channel | ~75% — populated during the `subscriptions` stage |
+| `defaultLanguage` | video | high — populated during `enrich` |
+| `defaultAudioLanguage` | video | ~65%, but distinguishes dubs from originals |
+| `defaultLanguage` | channel | ~2% — effectively useless, not stored |
+
+Channels with no country show as `--`; that means the owner never set one, not
+that it is unknown to YouTube. Because roughly a quarter are blank,
+`--ban-country` is a blunt instrument: it cannot catch what was never declared.
+
+These fields are stored but **not** sent to Claude. Filtering by language through
+the prompt would mean adding it to the per-video payload, which changes the
+payload shape and so requires a `PIPELINE_VERSION` bump in `src/lib/prompt.ts` —
+re-judging your whole library at full price. Banning by channel or country is
+free, so prefer it.
+
 ## Spending controls
 
 Judging costs roughly $0.002/video, which adds up fast on a first backlog of a
@@ -185,7 +227,7 @@ captured YouTube payloads with session identifiers stripped.
 | `src/ingest/scrape/` | Playwright, `ytInitialData` extraction, renderer walks |
 | `src/ingest/filter/` | prompt assembly, batching, retry, verdict persistence |
 | `src/app/` | feed grid, watch page, API routes |
-| `scripts/` | ingest, filter, verdicts, logins, fixtures, smoke tests |
+| `scripts/` | ingest, filter, verdicts, channels/bans, logins, fixtures, smoke tests |
 | `data/` | SQLite, browser profile, logs, debug dumps (all gitignored) |
 
 ## Notes

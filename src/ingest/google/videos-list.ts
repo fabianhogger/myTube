@@ -34,6 +34,8 @@ type RawVideo = {
     publishedAt?: string | null;
     thumbnails?: Record<string, { url?: string | null } | undefined> | null;
     liveBroadcastContent?: string | null;
+    defaultLanguage?: string | null;
+    defaultAudioLanguage?: string | null;
   } | null;
   contentDetails?: { duration?: string | null } | null;
   statistics?: { viewCount?: string | null } | null;
@@ -69,6 +71,8 @@ function toVideoInput(v: RawVideo): VideoInput | null {
     isShort: duration != null && duration <= SHORT_MAX_SECONDS,
     isLive: live === "live",
     isUpcoming: live === "upcoming",
+    language: v.snippet?.defaultLanguage ?? null,
+    audioLanguage: v.snippet?.defaultAudioLanguage ?? null,
   };
 }
 
