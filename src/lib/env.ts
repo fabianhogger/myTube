@@ -56,6 +56,13 @@ export const FAKE_LLM = () => flag("MYTUBE_FAKE_LLM");
 export const SCRAPE_HEADLESS = () => process.env.MYTUBE_SCRAPE_HEADLESS !== "0";
 /** Undefined means "use Playwright's bundled Chromium". */
 export const CHROME_CHANNEL = () => process.env.MYTUBE_CHROME_CHANNEL || undefined;
+/**
+ * Path to a Chromium-based browser to use instead of Playwright's bundled one
+ * (e.g. /snap/bin/brave). Takes precedence over MYTUBE_CHROME_CHANNEL. The
+ * scraper still uses its own profile directory either way — it has to own a
+ * profile it can relaunch headlessly.
+ */
+export const CHROME_PATH = () => process.env.MYTUBE_CHROME_PATH || undefined;
 export const BASE_URL = () => process.env.MYTUBE_BASE_URL || "http://localhost:3000";
 export const OAUTH_REDIRECT_URI = () => `${BASE_URL()}/api/auth/google/callback`;
 export const OAUTH_SCOPE = "https://www.googleapis.com/auth/youtube.readonly";

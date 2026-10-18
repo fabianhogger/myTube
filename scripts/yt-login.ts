@@ -2,7 +2,7 @@
  * Headed sign-in into the persistent Chrome profile the scraper reuses.
  * Run once, and again whenever Google invalidates the session.
  */
-import { CHROME_PROFILE_DIR } from "../src/lib/env";
+import { CHROME_CHANNEL, CHROME_PATH, CHROME_PROFILE_DIR } from "../src/lib/env";
 import { isSignedIn, launchContext, SESSION_COOKIES } from "../src/ingest/scrape/browser";
 import { logger } from "../src/lib/log";
 
@@ -11,7 +11,9 @@ const TIMEOUT_MS = 10 * 60_000;
 const POLL_MS = 2000;
 
 async function main() {
-  log.info(`opening a browser against ${CHROME_PROFILE_DIR}`);
+  const which = CHROME_PATH() ?? CHROME_CHANNEL() ?? "Playwright's bundled Chromium";
+  log.info(`opening ${which}`);
+  log.info(`profile: ${CHROME_PROFILE_DIR}`);
   log.info("sign in to YouTube in the window, and accept any cookie/consent dialog.");
 
   const ctx = await launchContext({ headless: false });

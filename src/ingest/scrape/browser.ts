@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { chromium, type BrowserContext } from "playwright";
-import { CHROME_CHANNEL, CHROME_PROFILE_DIR, SCRAPE_HEADLESS } from "../../lib/env";
+import { CHROME_CHANNEL, CHROME_PATH, CHROME_PROFILE_DIR, SCRAPE_HEADLESS } from "../../lib/env";
 import { NamedError } from "../../lib/types";
 
 /** Only one process may hold a Chromium profile directory at a time. */
@@ -27,9 +27,12 @@ export async function launchContext(opts: LaunchOpts = {}): Promise<BrowserConte
   else assertProfileFree();
   fs.mkdirSync(CHROME_PROFILE_DIR, { recursive: true });
 
+  // An explicit binary wins over a channel name; neither means bundled Chromium.
+  const executablePath = CHROME_PATH();
   return chromium.launchPersistentContext(CHROME_PROFILE_DIR, {
     headless,
-    channel: CHROME_CHANNEL(),
+    executablePath,
+    channel: executablePath ? undefined : CHROME_CHANNEL(),
     viewport: headless ? { width: 1440, height: 1000 } : null,
     locale: "en-US",
     timezoneId: Intl.DateTimeFormat().resolvedOptions().timeZone,

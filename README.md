@@ -51,6 +51,14 @@ npm run yt:login       # source B: sign in to the browser profile the scraper re
 closes itself once it sees the session cookie. Google invalidates this session
 every few weeks — rerun it when the scrape stage reports `not_signed_in`.
 
+By default that window is Playwright's bundled Chromium. To use another
+Chromium-based browser instead, set `MYTUBE_CHROME_PATH` (e.g. `/snap/bin/brave`)
+or `MYTUBE_CHROME_CHANNEL=chrome`. Two constraints worth knowing: Playwright
+cannot drive Firefox-family or snap-confined browsers for this, and it always
+uses **its own** profile at `data/chrome-profile` rather than your browser's
+existing one — it needs a profile it owns so it can relaunch it headlessly and
+unattended. So you sign in once in that window whichever binary you choose.
+
 ## Daily use
 
 ```bash
