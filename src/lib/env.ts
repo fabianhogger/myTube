@@ -60,6 +60,13 @@ export const BASE_URL = () => process.env.MYTUBE_BASE_URL || "http://localhost:3
 export const OAUTH_REDIRECT_URI = () => `${BASE_URL()}/api/auth/google/callback`;
 export const OAUTH_SCOPE = "https://www.googleapis.com/auth/youtube.readonly";
 
+/**
+ * Optional. videos.list reads only public data, so a plain API key is enough and
+ * keeps enrichment working even when the OAuth token is missing or expired.
+ * Your private subscription list still requires OAuth.
+ */
+export const YOUTUBE_API_KEY = () => process.env.YOUTUBE_API_KEY || undefined;
+
 export function requireEnv(name: string): string {
   const v = process.env[name];
   if (!v) throw new Error(`Missing required env var ${name}. Copy .env.local.example to .env.local and fill it in.`);

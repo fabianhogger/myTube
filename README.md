@@ -25,7 +25,15 @@ cp .env.local.example .env.local      # then fill it in
 
 `.env.local` needs an `ANTHROPIC_API_KEY`, plus `GOOGLE_CLIENT_ID` /
 `GOOGLE_CLIENT_SECRET` from a Google Cloud project with **YouTube Data API v3**
-enabled. Create an OAuth client of type **Desktop app** and register exactly this
+enabled. `YOUTUBE_API_KEY` from the same project is optional:
+
+| Credential | Used for | Required? |
+|---|---|---|
+| OAuth client | `subscriptions.list` — your subscription list | **yes**, it is private data an API key cannot read |
+| `YOUTUBE_API_KEY` | `videos.list` — duration and view count | optional; public data, but it keeps enrichment working when the OAuth token is missing or expired |
+| `ANTHROPIC_API_KEY` | judging videos | **yes** |
+
+Create an OAuth client of type **Desktop app** and register exactly this
 redirect URI:
 
 ```

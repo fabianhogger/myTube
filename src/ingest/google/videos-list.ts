@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
-import { FIXTURES_DIR, OFFLINE } from "../../lib/env";
+import { google } from "googleapis";
+import { FIXTURES_DIR, OFFLINE, YOUTUBE_API_KEY } from "../../lib/env";
 import { cleanDescription, parseIso8601Duration } from "../../lib/format";
 import { logger } from "../../lib/log";
 import { markEnriched, upsertVideos, videosNeedingEnrichment } from "../../lib/repo/videos";
@@ -85,7 +86,13 @@ export async function enrichVideos(runId: number | null, limit = 200): Promise<E
     const wanted = new Set(ids);
     raw = (fixture.items ?? []).filter((v) => v.id && wanted.has(v.id));
   } else {
-    const yt = youtubeClient(await authorizedClient());
+    // videos.list is public data: prefer the API key so enrichment does not
+    // depend on a working OAuth token, and fall back to OAuth when no key is set.
+    const key = YOUTUBE_API_KEY();
+    const yt = key
+      ? google.youtube({ version: "v3", auth: key })
+      : youtubeClient(await authorizedClient());
+    log.info(key ? "using YOUTUBE_API_KEY" : "no YOUTUBE_API_KEY — using the OAuth token");
     for (const batch of batches) {
       const res = await yt.videos.list({
         part: ["snippet", "contentDetails", "statistics"],
