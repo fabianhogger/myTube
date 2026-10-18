@@ -1,0 +1,31 @@
+{
+ "kind": "youtube#subscriptionListResponse",
+ "items": [
+  {
+   "snippet": {
+    "title": "Veritasium",
+    "resourceId": {
+     "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA"
+    },
+    "thumbnails": {
+     "default": {
+      "url": "https://yt3.ggpht.com/placeholder=s88"
+     }
+    }
+   }
+  },
+  {
+   "snippet": {
+    "title": "Fixture Channel Two",
+    "resourceId": {
+     "channelId": "UCfixtureCHANNEL0002xx"
+    },
+    "thumbnails": {
+     "default": {
+      "url": "https://yt3.ggpht.com/placeholder=s88"
+     }
+    }
+   }
+  }
+ ]
+}

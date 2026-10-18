@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# MyTube local state: database, browser profile, logs, debug dumps
+/data/
+# the filter prompt is personal; filter-prompt.example.md is the committed starter
+/filter-prompt.md
+.env.local

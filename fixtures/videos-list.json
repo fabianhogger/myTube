@@ -1,0 +1,576 @@
+{
+ "items": [
+  {
+   "id": "6U6Z6pb6ewI",
+   "snippet": {
+    "title": "When you lose weight where does it go?",
+    "description": "What does it mean to lose weight? When you work out or eat less your overall size decreases. So where does this mass go?",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-10-15T13:00:26+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/6U6Z6pb6ewI/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT1M35S"
+   },
+   "statistics": {
+    "viewCount": "913611"
+   }
+  },
+  {
+   "id": "NiCgcUTL9_Q",
+   "snippet": {
+    "title": "The Absurd Engineering Behind the Internet",
+    "description": "Why making glass fibers to send signals was almost impossible. Sponsored by Saily - 🌎 Get an exclusive 15% discount on Saily data plans! Download Saily app go to Use code veritasium at checkout ⛵ If you’re looking for a molecular modelling kit, try Snatoms, a kit I invented where the atoms snap together magnetically - For the latest science news, and for an exclusive bonus Q&A with Sulli, the director of this video, sign up to the Veritasium newsletter - For early access to work in progress videos join our patreon ▀▀▀ 0:00 What are fiber optics? 2:02 Why Copper Phone Lines Had Limited Capacity 5:13 Trying To Go From Copper Communication To Glass 8:15 Why is glass so ‘lossy’? 11:29 Scattering and Absorption 16:00 How can you remove impurities in glass? 19:00 How They Make Fiber Optic Glass 26:47 The Technology that Made the Internet Possible ▀▀▀ Special thanks to the experts and collaborators who made this video possible: Dr. Donald Keck Prof. Vincent Chan Sir David Payne Dr. Nikola Alic Jim Hayes Jeff Hecht, whose book City of Light: The Story of Fiber Optics was an invaluable resource for this video (explore his work at Diffraction Limited, who made the fiber kits we used and some additional simulations that were critical to our understanding ( Trulala CANDY Chef ( Additional thanks to: ROSENDAHL NEXTROM for providing animations and fiber manufacturing 3D assets: ( Bay Area Glass Institute for hosting our team. ( Prysmian for giving us a guided tour of their fiber manufacturing plant, and our two on screen experts: Sujeet Rao, Operational Excellence Fiber Director and Jon Fitz, Technical Sales Support Sr. Manager. ▀▀▀ References: Note: The skin effect explanation is simplified. The full analysis involves the eddy currents' own magnetic fields, which induce further currents, and so on. Here’s an article on the same: ▀▀▀ Special thanks to our Patreon supporters: Adam Foreman, Albert Wenger, Alex Porter, Alexander Tamas, André Powell, Anton Ragin, Balkrishna Heroor, Bertrand Serlet, Blake Byers, Bruce, Bryan Ackermann, Chris Brewer, Data Don, Dave Kircher, David Johnston, David Tseng, EJ Alexandra, Evgeny Skvortsov, Garrett Mueller, Gnare, gpoly, Hayden Christensen, Hong Thai Le, Ibby Hadeed, Jeromy Johnson, Juan Benet, Kelcey Steele, Kyi, Lee Redden, Marinus Kuivenhoven, Mark Heising, Meekay, meg noah, Michael Krugman, Orlando Bassotto, Parsee Health, Patreon mp22, Paul Peijzel, Robson, Sam Lutfi, Shalva Bukia, Sinan Taifour, Steven, Sweet_Nemo, Tair Aurmont, Tj Steyn, Ubiquity Ventures, Vahe Andonians, wolfee ▀▀▀ Credits Writers: Sulli Yost, Henry van Dyck Producer and Director: Sulli Yost Presenter: Henry van Dyck Editors: George Reynolds, Trenton Oliver and Axel Oliver Assistant Editor: James Stuart Illustrators: Jakub Misiek, Raphael Aubry, Thomas Brizard and Emma Wright Animators: Aleksandrs Loginovs, Alex Drakoulis, Andrew Neet, Andrew Wernette, Domonkos Józsa, Emma Wright, Fabio Albertelli, Rokas Viksraitis and Sulli Yost Researchers: Aakash Singh Bagga, Sophia Rose, Callum Cuttle and Gabe Strong Camera Operators: Sulli Yost, Aaron Zhizhin, Emilia Gyles and Jesse Chandler Thumbnail Designers: Abdallah Rabah, Daniel Ellacott Production Team: Anna Milkovic, Glen Griffiths, Jess Bishop-Laggett, Matthew Cavanagh Executive Producers: Derek Muller, Emilia Gyles and Henry van Dyck",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-10-12T17:11:45+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/NiCgcUTL9_Q/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT10M37S"
+   },
+   "statistics": {
+    "viewCount": "9454694"
+   }
+  },
+  {
+   "id": "j9p3Sn8ROL4",
+   "snippet": {
+    "title": "What is edge dislocation?",
+    "description": "We demonstrated a crystal lattice of atoms using bubbles.",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-10-09T13:00:03+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/j9p3Sn8ROL4/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT11M14S"
+   },
+   "statistics": {
+    "viewCount": "3546497"
+   }
+  },
+  {
+   "id": "IHkp5Kq72ro",
+   "snippet": {
+    "title": "How Dangerous Are Non-Stick Pans?",
+    "description": "What happens to your body if you eat Teflon from a non-stick pan? #pfas #foreverchemicals",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-10-01T18:26:42+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i2.ytimg.com/vi/IHkp5Kq72ro/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT11M51S"
+   },
+   "statistics": {
+    "viewCount": "1608952"
+   }
+  },
+  {
+   "id": "ONAuUyml0yI",
+   "snippet": {
+    "title": "We're trying something new...",
+    "description": "Veritasium's mission has always been to get to the truth - to understand how and why things work the way they do. We love the variety of topics we're able to cover - from the real to the abstract - and the heart of that is always hard science. But as our world is getting more complex and interesting, the team keep finding incredible stories that don't quite fit on the main channel. Stories that are less about physics and maths and more about how our society and global systems work; how a change on one side of the world can ripple through society affecting how you and I live our lives. So some of the team have been working on a new channel about just that. This is @InGeniusOfficial - an element of innovation. Hosted by Latif Nasser First video out now -",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-30T19:19:10+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i4.ytimg.com/vi/ONAuUyml0yI/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT12M28S"
+   },
+   "statistics": {
+    "viewCount": "1367525"
+   }
+  },
+  {
+   "id": "VKlulHwMxgU",
+   "snippet": {
+    "title": "What happens to these balloons when you open the valve?",
+    "description": "Take a balloon and fill it with lots of air. Take another one and fill it with less air. Now connect the two via a valve. What do you think will happen when you open the valve?",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-24T13:00:24+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/VKlulHwMxgU/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT13M5S"
+   },
+   "statistics": {
+    "viewCount": "1505492"
+   }
+  },
+  {
+   "id": "JsBZOcqZerk",
+   "snippet": {
+    "title": "The Insane Real Engineering of the Nazi Enigma Machine",
+    "description": "How did Bletchley Park's codebreakers crack the \"unbreakable\" enigma? Sponsored by Incogni - use code veritasium at to get an exclusive 60% off your annual subscription. If you’re looking for a molecular modelling kit, try Snatoms, a kit I invented where the atoms snap together magnetically - For the latest science news, and for an exclusive bonus Q&A with the director of this video, sign up to the Veritasium newsletter - For early access to work in progress videos join our patreon ▀▀▀ 0:00 Who invented Enigma? 4:16 How did Enigma work? 10:51 The Secret Spy Mansion 13:10 The First Codebreakers Who Broke Enigma 16:45 Trying To Decrypt An Enigma Message 22:35 Who was Alan Turing? 26:30 How Enigma’s Flaws Were Exploited 34:27 Breaking Enigma - The Bombe 41:39 The Naval Enigma 44:35 What did Alan Turing do after Bletchley Park? ▀▀▀ A huge thanks out to Sir Dermot Turing, Jonah Weinbaum, Andrew Fryer, John Pickles, Peter Hoath, Robert Dowell and all of the experts at Bletchley Park & The National Museum of Computing that helped make this video possible! Shout out to Jared Owen for letting us use his 3D model of the Enigma machine! Check out his amazing video: Bletchley Park is a museum and heritage attraction open daily to visitors. To plan your visit and book tickets, head to: The National Museum of Computing at Bletchley Park is an independent charity housing working historic machines. Plan your visit here: ▀▀▀ Can you decrypt this unbroken Naval Enigma message? Let us know in the comments! JCRSAJTGSJEYEXYKKZZSHVUOCTRFRCRPFVYPLKPPLGRHVVBBTBRSXSWXGGTYTVKQNGSCHVGF Universal Enigma simulator by Daniel Palloks: ▀▀▀ References: Visual References: ▀▀▀ Special thanks to our Patreon supporters: Adam Foreman, Albert Wenger, Alex Porter, Alexander Tamas, André Powell, Anton Ragin, Balkrishna Heroor, Bertrand Serlet, Blake Byers, Bruce, Bryan Ackermann, Chris Brewer, Data Don, Dave Kircher, David Johnston, David Tseng, EJ Alexandra, Evgeny Skvortsov, Garrett Mueller, Gnare, gpoly, Hayden Christensen, Hong Thai Le, Ibby Hadeed, Jeromy Johnson, Juan Benet, Kelcey Steele, Kyi, Lee Redden, Marinus Kuivenhoven, Mark Heising, Meekay, meg noah, Michael Krugman, Moebiusol - Cristian, Orlando Bassotto, Parsee Health, Patreon mp22, Paul Peijzel, Robson, Sam Lutfi, Shalva Bukia, Sinan Taifour, Steven, Sweet_Nemo, Tair Aurmont, Tj Steyn, Ubiquity Ventures, Vahe Andonians, wolfee ▀▀▀ Writers: James Moore, Gregor Čavlović, Darius Garewal & Emilia Gyles Producer & Director: James Moore Additional Directing: Darius Garewal Presenters: Gregor Čavlović & Derek Muller Editor: Peter Nelson Additional Editing: James Stuart & Trenton Oliver Camera Operators: Rob Newman & Darius Garewal Animators: Emma Wright, Domonkos Józsa, Alex Drakoulis, Andrew Neet, Rokas Vikšraitis & Aleksandrs Loginovs Illustrator: Jakub Misiek Researchers: Darius Garewal & Gabe Strong Thumbnail Designers: Abdallah Rabah, Daniel Ellacott & Ben Powell Production Team: Jess Bishop-Laggett, Glen Griffiths, Matthew Cavanagh & Anna Milkovic Executive Producers: Gregor Čavlović, Emilia Gyles, Henry van Dyck & Derek Muller Additional video/photos supplied by Getty Images and Storyblocks Music from Epidemic Sound & Sprach Zarathustra - Conducted by Philip Milman (",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-21T17:49:57+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/JsBZOcqZerk/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT13M42S"
+   },
+   "statistics": {
+    "viewCount": "20235042"
+   }
+  },
+  {
+   "id": "hPoJWjJ9Ao8",
+   "snippet": {
+    "title": "Heating A Ball Just By Squeezing It",
+    "description": "How Jupiter heats its moon, just be stretching and squeezing it.",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-18T13:00:00+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i1.ytimg.com/vi/hPoJWjJ9Ao8/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT1M35S"
+   },
+   "statistics": {
+    "viewCount": "929027"
+   }
+  },
+  {
+   "id": "O3a99HNskNk",
+   "snippet": {
+    "title": "The Scariest Chart In Engineering",
+    "description": "Why is the Smith Chart one of the scariest charts in electrical engineering? We printed the largest one in the world to explain how it works and why it's so terrifying (to engineers at least).",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-10T13:00:12+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i4.ytimg.com/vi/O3a99HNskNk/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT14M56S"
+   },
+   "statistics": {
+    "viewCount": "1563884"
+   }
+  },
+  {
+   "id": "oR94cicO7xM",
+   "snippet": {
+    "title": "The Most Dangerous Escalator In Europe",
+    "description": "In 2018 football fans were leaving a stadium in Rome. They boarded an escalator down to the metro. Suddenly the machine sprung a fault. Multiple safety systems were triggered. One after another. And then the final line failed. This is why.",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-06T13:00:26+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i4.ytimg.com/vi/oR94cicO7xM/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT15M33S"
+   },
+   "statistics": {
+    "viewCount": "7155886"
+   }
+  },
+  {
+   "id": "F5_G0AHfYhI",
+   "snippet": {
+    "title": "A Physics Professor Bet Me $10,000 I'm Wrong...",
+    "description": "A UCLA Physics Professor bet me $10,000 that my video ( about going downwind faster than the wind was wrong. Here's how we proved it...",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-09-02T13:00:04+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/F5_G0AHfYhI/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT16M10S"
+   },
+   "statistics": {
+    "viewCount": "3033613"
+   }
+  },
+  {
+   "id": "b3KpFdb1pW8",
+   "snippet": {
+    "title": "We Took $10,000 From @mkbhd's Locked iPhone",
+    "description": "There's a flaw in some virtual wallets. We exploited this flaw to steal $10,000 from @mkbhd. Watch the full video to find out how we did it...",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-08-26T15:00:02+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/b3KpFdb1pW8/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT16M47S"
+   },
+   "statistics": {
+    "viewCount": "5898428"
+   }
+  },
+  {
+   "id": "5U-V0y-fkSw",
+   "snippet": {
+    "title": "It's impossible to choose a number at random",
+    "description": "In math you can't truly pick things at random because formulas always give the same result. So if we can't pick randomly, how do we select anything in math?",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-08-24T13:08:34+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i2.ytimg.com/vi/5U-V0y-fkSw/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT17M24S"
+   },
+   "statistics": {
+    "viewCount": "1912680"
+   }
+  },
+  {
+   "id": "nHAFnH3xRl4",
+   "snippet": {
+    "title": "Could identical twins commit the perfect crime?",
+    "description": "The DNA in twins is (almost) exactly the same. So how could a team of forensic scientists tell which twin committed the crime? There is a way but it has some issues...",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-08-18T11:33:08+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/nHAFnH3xRl4/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT18M1S"
+   },
+   "statistics": {
+    "viewCount": "932711"
+   }
+  },
+  {
+   "id": "J1WoNuemKOg",
+   "snippet": {
+    "title": "We sent a camera to space to film the solar eclipse",
+    "description": "What does an eclipse look like from the edge of space? We travelled to Spain for the 2026 total solar eclipse to find out. Sponsored by 80,000 Hours - Head to to start planning a career that can help change the world for the better. By joining their newsletter, you’ll get a free copy of their in-depth career guide sent to your inbox. If you’re looking for a molecular modelling kit, try Snatoms, a kit I invented where the atoms snap together magnetically - Sign up for the Veritasium newsletter for weekly science updates - To be in with a chance of getting a NASA sticker that went to the edge of space during the eclipse and for early access to work-in-progress videos, join our Patreon Last year, we launched Elements of Truth on Kickstarter and were thrilled by the response. We’re now in the final stages of production, with Kickstarter rewards shipping soon. If you missed the campaign, you can now pre-order the retail edition through our new website here - If you backed us on Kickstarter, don’t worry, your game will ship before any pre-orders are fulfilled. ▀▀▀ 00:00 The 2026 Total Solar Eclipse 02:00 Why there are more total solar eclipses in the Northern Hemisphere 03:30 How we get 5 solar eclipses a year 06:20 Why the Sun turns white only during totality 09:27 How the eclipse faked an element 11:10 The weird shadows during the eclipse 14:06 Shadow band effect 17:00 Filming the eclipse from space ▀▀▀ Special thanks to the experts and collaborators who made this video possible: The Montana State University NASA Ballooning Team, for working with us on this video and for the incredible footage of the eclipse from the edge of space. Project Leads: Angela Des Jardins and Michael Walach Students: Ava Arbogast, Isabel Besel, Ryder Cole, Daniel Graves, Mari Greene, Mikael Savage, Gabriel Sova, Addison Zumwalt The Exploratorium Team, for providing their insights and footage from their livestream © The Exploratorium All rights reserved. Used and adapted with authorization. The Exploratorium® is a registered trademark of The Exploratorium®. Michael Kirk for taking the time to chat with us and sharing his expertise. NASA's Goddard Space Flight Center for speaking with us and for sharing details of their WB-57 aircraft eclipse mission. The team at @astrumspace for their help and support on this video. Check out their video on how ESA’s Proba-3 mission uses satellites to create artificial eclipses in space and reveal the inner corona for the first time: Also, very glad we ran into during totality! Check out his channel! ▀▀▀ References: ▀▀▀ Special thanks to our Patreon supporters: Adam Foreman, Albert Wenger, Alex Porter, Alexander Tamas, André Powell, Anton Ragin, Balkrishna Heroor, Bertrand Serlet, Blake Byers, Bruce, Bryan Ackermann, Chris Brewer, Data Don, Dave Kircher, David Johnston, David Tseng, EJ Alexandra, Evgeny Skvortsov, Garrett Mueller, Gnare, gpoly, Hayden Christensen, Hong Thai Le, Hybrid Minds, Ibby Hadeed, Jeromy Johnson, Juan Benet, Kelcey Steele, KeyWestr, Kyi, Lee Redden, Marinus Kuivenhoven, Mark Heising, Martin Paull, Meekay, meg noah, Michael Krugman, Orlando Bassotto, Parsee Health, Paul Peijzel, Robson, Sam Lutfi, Shalva Bukia, Sinan Taifour, Sweet_Nemo, Tj Steyn, Ubiquity Ventures, wolfee ▀▀▀ Credits Writers: Emilia Gyles, Gregor Čavlović and Henry van Dyck, Producer and Director: Emilia Gyles, Gregor Čavlović and Henry van Dyck Presenter: Emilia Gyles, Gregor Čavlović and Henry van Dyck Editors: Peter Nelson and Trenton Oliver Assistant Editor: James Stuart Animators: Archie Crofton and Emma Wright Researchers: Sophia Rose, Aakash Singh Bagga, Shourya Shrivastava and Gabe Strong Camera Operators: Archie Crofton, Emilia Gyles, Gregor Čavlović, Henry van Dyck, James Stuart and Peter Nelson Thumbnail Designers: Abdallah Rabah, Daniel Ellacott & Ben Powell Production Team: Jess Bishop-Laggett, Glen Griffiths, Matthew Cavanagh, Anna Milkovic, Justin St Laurent and James Dowse Executive Producers: Emilia Gyles, Gregor Čavlović & Henry van Dyck",
+    "channelId": "HnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-08-17T14:30:16+00:00",
+    "thumbnails": {
+     "high": {
+      "url": "https://i3.ytimg.com/vi/J1WoNuemKOg/hqdefault.jpg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT1M35S"
+   },
+   "statistics": {
+    "viewCount": "2767212"
+   }
+  },
+  {
+   "id": "wt4p2oalmRY",
+   "snippet": {
+    "title": "Is spider web really stronger than steel?",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-08-18T18:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/wt4p2oalmRY/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCuSBeBdj2vkOv6An_dMCgi-1A1zw"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT26M58S"
+   },
+   "statistics": {
+    "viewCount": "9700000"
+   }
+  },
+  {
+   "id": "tL9Lw250spc",
+   "snippet": {
+    "title": "Why does every mammal get 1 billion heartbeats in their life?",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-08-18T18:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/tL9Lw250spc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLClxiF3uN1WnXjy2d7A6G2XEZI4zQ"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT35M32S"
+   },
+   "statistics": {
+    "viewCount": "6700000"
+   }
+  },
+  {
+   "id": "GK2pZ_oVU1o",
+   "snippet": {
+    "title": "The Scariest Chart in Electrical Engineering",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-07-19T07:50:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/GK2pZ_oVU1o/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDyGsc5SN_Bb6C66TXCbQ9_Cu_LZQ"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT39M44S"
+   },
+   "statistics": {
+    "viewCount": "6400000"
+   }
+  },
+  {
+   "id": "mvcesPWvUIc",
+   "snippet": {
+    "title": "We've Been Using The Wrong Science In Court For 50 years",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-07-19T07:50:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/mvcesPWvUIc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLC6rjDE5Wi7AdQp7dU0GWaYvkjN5g"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT23M22S"
+   },
+   "statistics": {
+    "viewCount": "2600000"
+   }
+  },
+  {
+   "id": "8HBDE-msUjw",
+   "snippet": {
+    "title": "We're 99.9% sure this pattern is true, but no one can prove it",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-06-18T21:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/8HBDE-msUjw/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLBxpSlkoiuZbgitPRsQA4sVDhPgKw"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT41M30S"
+   },
+   "statistics": {
+    "viewCount": "6600000"
+   }
+  },
+  {
+   "id": "tz23G_UXCGA",
+   "snippet": {
+    "title": "Something is jamming GPS over Europe. Here's what we found",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-06-18T21:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/tz23G_UXCGA/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLCydOyNVjnyoF8ebQmEI8huuPKrqA"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT34M17S"
+   },
+   "statistics": {
+    "viewCount": "12000000"
+   }
+  },
+  {
+   "id": "kS-CGkiPetQ",
+   "snippet": {
+    "title": "Google Maps is unreasonably fast. Let me explain",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-06-18T21:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/kS-CGkiPetQ/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD3UnVZ2RJT_mIonqoFcmmP2ZXxEw"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT29M54S"
+   },
+   "statistics": {
+    "viewCount": "8700000"
+   }
+  },
+  {
+   "id": "SVTPv4sI_Jc",
+   "snippet": {
+    "title": "The CIA's new tech doesn't make sense",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-05-19T10:50:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/SVTPv4sI_Jc/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAZRMwzf6sxc38xywhdQQoA-UvOGw"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT21M18S"
+   },
+   "statistics": {
+    "viewCount": "3300000"
+   }
+  },
+  {
+   "id": "ksn5yrsC3Wg",
+   "snippet": {
+    "title": "The Crystal That Could Destroy All Medicine",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-05-19T10:50:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/ksn5yrsC3Wg/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLDL_nPVvD7QDyRkjL8ulX9vxAa3NQ"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT33M25S"
+   },
+   "statistics": {
+    "viewCount": "10000000"
+   }
+  },
+  {
+   "id": "PPJ6NJkmDAo",
+   "snippet": {
+    "title": "How easy is it to steal $10,000 from a locked phone?",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-04-19T00:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/PPJ6NJkmDAo/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLAqBwwzihhA-NVsQYEyuBUDVZX24w"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT25M44S"
+   },
+   "statistics": {
+    "viewCount": "9600000"
+   }
+  },
+  {
+   "id": "jjp3WC8Unj8",
+   "snippet": {
+    "title": "What happens if you drop 0.125 grams of antimatter?",
+    "description": "Fixture description for offline mode.",
+    "channelId": "UCHnyfMqiRRG1u-2MsSQLbXA",
+    "channelTitle": "Veritasium",
+    "publishedAt": "2026-04-19T00:20:27Z",
+    "thumbnails": {
+     "high": {
+      "url": "https://i.ytimg.com/vi/jjp3WC8Unj8/hq720.jpg?sqp=-oaymwEcCOgCEMoBSFXyq4qpAw4IARUAAIhCGAFwAcABBg==&rs=AOn4CLD67VI_Nl_kzOz_6du4U0HtMl2uKg"
+     }
+    },
+    "liveBroadcastContent": "none"
+   },
+   "contentDetails": {
+    "duration": "PT58M54S"
+   },
+   "statistics": {
+    "viewCount": "12000000"
+   }
+  }
+ ]
+}
