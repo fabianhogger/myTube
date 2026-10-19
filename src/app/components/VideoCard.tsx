@@ -9,7 +9,14 @@ export function VideoCard({ video }: { video: VideoRow }) {
     .join(" · ");
 
   return (
-    <Link href={`/watch/${video.id}`} className="group block">
+    <Link
+      href={`/watch/${video.id}`}
+      className="group block"
+      // FeedContextMenu reads these to offer "ban this channel" on right-click.
+      // Omitted when the channel is unknown, so the browser menu stays intact.
+      data-channel-id={video.channel_id ?? undefined}
+      data-channel-title={video.channel_title ?? undefined}
+    >
       <div className="relative aspect-video overflow-hidden rounded-xl bg-surface">
         {video.thumbnail_url ? (
           // Thumbnails come from several YouTube CDN hosts and are already sized;
